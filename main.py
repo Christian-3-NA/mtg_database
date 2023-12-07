@@ -182,3 +182,5 @@ while exit_program == False:
 
         else:
             print('Thats not an accepted input!')
+
+db.close()
