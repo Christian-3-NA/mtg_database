@@ -42,6 +42,7 @@ while exit_program == False:
             temp1 = input()
             print('\nPassword:')
             temp2 = input()
+            cur.execute("""INSERT INTO Profile VALUES (temp1, temp2, 'email@email.com', 3, 3)""")
 
             for i in user_login_info:
                 if (i[0] == temp1) and (i[1] == temp2):
