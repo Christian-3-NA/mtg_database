@@ -4,21 +4,8 @@
 # File:    main.py
 # Purpose: run the mtg database program
 
-import pyodbc
-
-# connecting to the database (check slide 26)
-driver = "{ODBC Driver 17 for SQL Server}"
-server = "xxxxxx"
-database = "xxxxx"
-username = "xxxxx"
-password = "xxxxxx"
-conn = pyodbc.connect("DRIVER=" + driver
-                      + ";SERVER=" + server
-                      + ";DATABASE=" + database
-                      + ";UID=" + username
-                      + ";PWD=" + password )
-
-cursor = conn.cursor()
+import sqlite3
+db=sqlite3.connect('magic.db')
 
 # variables
 exit_program = False
