@@ -6,6 +6,8 @@
 
 import sqlite3
 db=sqlite3.connect('magic.db')
+cur = db.cursor()
+db.commit()
 
 # variables
 exit_program = False
