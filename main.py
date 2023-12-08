@@ -5,8 +5,20 @@
 # Purpose: run the mtg database program
 
 import sqlite3
-db=sqlite3.connect('magic.db')
+
+testdb = sqlite3.connect("magic.db")
+testcur = testdb.cursor()
+sql_file = open("Magic.sql") # reading main sql file
+sql_as_string = sql_file.read()
+testcur.executescript(sql_as_string)
+testdb.commit()
+testdb.close()
+
+db=sqlite3.connect("magic.db")
 cur = db.cursor()
+sql_file = open("cardlib.sql") # adding more cards into database
+sql_as_string = sql_file.read()
+cur.executescript(sql_as_string)
 db.commit()
 
 # variables
@@ -42,7 +54,6 @@ while exit_program == False:
             temp1 = input()
             print('\nPassword:')
             temp2 = input()
-            cur.execute("""INSERT INTO Profile VALUES (temp1, temp2, 'email@email.com', 3, 3)""")
 
             for i in user_login_info:
                 if (i[0] == temp1) and (i[1] == temp2):
@@ -73,7 +84,19 @@ while exit_program == False:
             if temp2 == '':
                 print('\nPassword cant be empty! Try again.')
 
-        user_login_info.append([temp1, temp2])
+        print('\nWhat\'s the email associated with this new account?')
+
+        while temp3 == '':
+            temp3 = input()
+            if temp3 == '':
+                print('\nEmail cant be empty! Try again.')
+
+        new_coll_val = cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
+        new_coll_val += 1
+        cur.execute("""INSERT INTO Profile VALUES (temp1, temp2, temp3, 0, new_coll_val);""")
+        db.commit()        
+
+        #user_login_info.append([temp1, temp2]) old placeholder code
         print('\nAccount Created!')
 
     elif terminal_input == '3':
