@@ -1,4 +1,4 @@
-# Name:    Christian Anderson
+# Name:    Sassy Solitaire Skeletons: Christian Anderson, Dominic Macias, Nina Martinez-Alvarez
 # Github:  Christian-3-NA
 # Date:    12/6/23
 # File:    main.py
@@ -24,7 +24,7 @@ db.commit()
 # variables
 exit_program = False
 terminal_input = ''
-user_login_info = []
+user_login_info = [['admin', 'password']]
 signed_in_as = ''
 
 temp1 = ''
@@ -110,7 +110,7 @@ while exit_program == False:
     # |           Main loop              |
     # ------------------------------------
     
-    while signed_in_as != '':
+    while (signed_in_as != '') and (signed_in_as != 'admin'):
         print('''\nWhat would you like to do?
  Display Collection ----------- (1)
   Add Card To Collection ------ (2)
@@ -143,8 +143,24 @@ while exit_program == False:
         elif terminal_input == '5':
             print('\n5')
             
+        # Create deck
         elif terminal_input == '6':
-            print('\n6')
+            temp1 = ''
+            temp2 = ''
+            temp3 = ''
+            print('\nWhats the name for the new deck?')
+            temp1 = input()
+            print('\nWhat are the tags?')
+            temp2 = input()
+            print('\nWhat is the format?')
+            temp3 = input()
+
+
+
+            qry = 'insert into Deck (deck_id, deck_name, tags, format, d_cards_owned) values(?, ?, ?, ?, NULL);'
+            cur.execute(qry, (1, temp1, temp2, temp3))
+            db.commit()
+            print('Deck created successfully.')
             
         elif terminal_input == '7':
             print('\n7')
@@ -209,4 +225,52 @@ while exit_program == False:
         else:
             print('Thats not an accepted input!')
 
+    # ------------------------------------
+    # |          Admin loop              |
+    # ------------------------------------
+
+    while signed_in_as == 'admin':
+        print('''\nWhat would you like to do?
+  Create Card - (1)
+  Edit Card --- (2)
+  Delete Card - (3)
+  Delete User - (4)
+  Sign Out ---- (5)''')
+        
+        terminal_input = input()
+        if terminal_input == '1':
+            print('\n1')
+
+        elif terminal_input == '2':
+            print('\n2')
+
+        elif terminal_input == '3':
+            print('\n3')
+            
+        elif terminal_input == '4':
+            temp3 = ''
+            print('\nWhat account would you like to delete?')
+            temp2 = input()
+            while temp2 == 'admin':
+                print('\nYou can\'t delete the admin account, please provide a different user.')
+                temp2 = input()
+
+            for i in user_login_info:
+                if i[0] == temp2:
+                    temp3 = 'account found'
+                    print('\nAre you sure? This action cannot be undone. (type YES to confirm)')
+                    temp1 = input()
+
+                    if temp1 == 'YES':
+                        print('\nDeleting Account...')
+                        user_login_info.remove(i)
+                    else:
+                        print('Deletion cancelled.')
+            
+            if temp3 != 'account found':
+                print('\nAccount does not exist.')
+            
+        elif terminal_input == '5':
+            print('Signing out...')
+            signed_in_as = ''
 db.close()
