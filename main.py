@@ -105,20 +105,49 @@ while exit_program == False:
   Sign Out -------------------- (14)''')
         
         terminal_input = input()
+        #Display Collection
         if terminal_input == '1':
-            print('\n1')
+            qry = 'SELECT * FROM Collection'
+            cur.execute(qry)
+            db.commit()
+            temp1 = cur.fetchall()
+            for i in temp1:
+                print(i)
 
         elif terminal_input == '2':
-            print('\n2')
+            print('\nWhat card are you adding? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'UPDATE Collection SET c_cards_owned=? WHERE collection_id=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
 
         elif terminal_input == '3':
-            print('\n3')
+            print('\nWhat card are you removing? (Provide the id of the card)')
+            temp1 = input()
+
+            qry = 'DELETE FROM Collection WHERE c_cards_owned=?'
+            cur.execute(qry, (temp1))
+            db.commit()
             
         elif terminal_input == '4':
-            print('\n4')
+            print('\nWhat card are you looking for? (Provide the id of the card)')
+            temp1 = input()
+
+            qry = 'SELECT * FROM Collection WHERE c_cards_owned=?'
+            cur.execute(qry)
+            db.commit()
+            temp1 = cur.fetchall()
+            for i in temp1:
+                print(i)
             
+        # Display Deck
         elif terminal_input == '5':
-            print('\n5')
+            qry = 'SELECT * FROM Deck'
+            cur.execute(qry)
+            temp1 = cur.fetchall()
+            for i in temp1:
+                print(i)
             
         # Create deck
         elif terminal_input == '6':
@@ -132,27 +161,61 @@ while exit_program == False:
             print('\nWhat is the format?')
             temp3 = input()
 
-
-
-            qry = 'insert into Deck (deck_id, deck_name, tags, format, d_cards_owned) values(?, ?, ?, ?, NULL);'
+            qry = 'INSERT INTO Deck (deck_id, deck_name, tags, format, d_cards_owned) values(?, ?, ?, ?, NULL);'
             cur.execute(qry, (1, temp1, temp2, temp3))
             db.commit()
             print('Deck created successfully.')
             
         elif terminal_input == '7':
-            print('\n7')
+            print('\nWhats the name of the deck youre updating?')
+            temp1 = input()
+            print('\nWhat card are you adding? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'UPDATE Deck SET d_cards_owned=? WHERE deck_name=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
             
         elif terminal_input == '8':
-            print('\n8')
+            print('\nWhats the name of the deck youre updating?')
+            temp1 = input()
+            print('\nWhat card are you deleting? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'DELETE FROM Deck WHERE d_cards_owned=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
             
         elif terminal_input == '9':
-            print('\n9')
+            print('\nWhats the name of the deck youre updating?')
+            temp1 = input()
+            print('\nWhats the new name?')
+            temp2 = input()
+
+            qry = 'UPDATE Deck SET deck_name=? WHERE deck_name=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
             
         elif terminal_input == '10':
-            print('\n10')
+            print('\nWhats the name of the deck youre deleting?')
+            temp1 = input()
+
+            qry = 'DELETE FROM Deck WHERE deck_name=?'
+            cur.execute(qry, (temp1))
+            db.commit()
             
+        # Search for Deck
         elif terminal_input == '11':
-            print('\n11')
+            print('\nWhat deck would you like to display? Please provide the exact name.')
+            temp2 = input()
+
+            qry = 'SELECT * FROM Deck'
+            cur.execute(qry)
+            db.commit()
+            temp1 = cur.fetchall()
+            for i in temp1:
+                if i[1] == temp2:
+                    print(i)
             
         elif terminal_input == '12':
             temp1 = ''
@@ -216,13 +279,28 @@ while exit_program == False:
         
         terminal_input = input()
         if terminal_input == '1':
-            print('\n1')
+            print('\nWhat card are you adding? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'UPDATE CardLibrary SET l_cards_owned=? WHERE library_id=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
 
         elif terminal_input == '2':
-            print('\n2')
+            print('\nWhat card are you adding? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'UPDATE CardLibrary SET l_cards_owned=? WHERE library_id=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
 
         elif terminal_input == '3':
-            print('\n3')
+            print('\nWhat card are you adding? (Provide the id of the card)')
+            temp2 = input()
+
+            qry = 'UPDATE CardLibrary SET l_cards_owned=? WHERE library_id=?'
+            cur.execute(qry, (temp2, temp1))
+            db.commit()
             
         elif terminal_input == '4':
             temp3 = ''
