@@ -10,7 +10,7 @@ testdb = sqlite3.connect("magic.db")
 testcur = testdb.cursor()
 sql_file = open("Magic.sql") # reading main sql file
 sql_as_string = sql_file.read()
-testcur.executescript(sql_as_string)
+#testcur.executescript(sql_as_string)
 testdb.commit()
 testdb.close()
 
@@ -18,7 +18,7 @@ db=sqlite3.connect("magic.db")
 cur = db.cursor()
 sql_file = open("cardlib.sql") # adding more cards into database
 sql_as_string = sql_file.read()
-cur.executescript(sql_as_string)
+#cur.executescript(sql_as_string)
 db.commit()
 
 # variables
@@ -54,18 +54,15 @@ while exit_program == False:
             temp1 = input()
             print('\nPassword:')
             temp2 = input()
-
-            for i in user_login_info:
-                if (i[0] == temp1) and (i[1] == temp2):
-                    print('\nSign in successful.')
-                    signed_in_as = i[0]
+            signed_in_as = temp1
 
             if signed_in_as == '':
-                print('\nSign in failed.') 
+                print('\nSign in failed.')
 
     elif terminal_input == '2':
         temp1 = ''
         temp2 = ''
+        temp3 = ''
         print('\nWhat\'s the username for the new account?')
 
         while temp1 == '':
@@ -91,12 +88,13 @@ while exit_program == False:
             if temp3 == '':
                 print('\nEmail cant be empty! Try again.')
 
-        new_coll_val = cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
-        new_coll_val += 1
-        cur.execute("""INSERT INTO Profile VALUES (temp1, temp2, temp3, 0, new_coll_val);""")
+        cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
+        new_coll_val = cur.fetchone()
+        new_coll_val = int(new_coll_val[0]) + 1
+        qry = "INSERT Into Profile(user_id, password, email, decks_owned, paired_collection) Values(?, ?, ?, ?, ?);"
+        cur.execute(qry, (temp1, temp2, temp3, 0, new_coll_val))
         db.commit()        
 
-        #user_login_info.append([temp1, temp2]) old placeholder code
         print('\nAccount Created!')
 
     elif terminal_input == '3':
@@ -190,7 +188,7 @@ while exit_program == False:
             print('Deck created successfully.')
             
         elif terminal_input == '7':
-            print('\nWhats the name of the deck youre updating?')
+            print('\nWhat is the name of the deck you are updating?')
             temp1 = input()
             print('\nWhat card are you adding? (Provide the id of the card)')
             temp2 = input()
