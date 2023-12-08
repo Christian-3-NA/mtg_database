@@ -4,6 +4,11 @@
 # File:    main.py
 # Purpose: run the mtg database program
 
+import sqlite3
+db=sqlite3.connect('magic.db')
+cur = db.cursor()
+db.commit()
+
 # variables
 exit_program = False
 terminal_input = ''
@@ -37,6 +42,7 @@ while exit_program == False:
             temp1 = input()
             print('\nPassword:')
             temp2 = input()
+            cur.execute("""INSERT INTO Profile VALUES (temp1, temp2, 'email@email.com', 3, 3)""")
 
             for i in user_login_info:
                 if (i[0] == temp1) and (i[1] == temp2):
@@ -244,3 +250,4 @@ while exit_program == False:
         elif terminal_input == '5':
             print('Signing out...')
             signed_in_as = ''
+db.close()

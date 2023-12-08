@@ -71,7 +71,7 @@ Values(2, 'Cosmium Blast', 'The Lost Caverns Of Ixalan', 'Cosmium Blast deals 4 
 INSERT Into Collection(collection_id, c_cards_owned, num_cards)
 Values(1, 1, 1);
 INSERT Into Collection(collection_id, c_cards_owned, num_cards)
-Values(1, 2, 2);
+Values(2, 2, 2);
 
 INSERT Into Deck(deck_id, deck_name, tags, format, d_cards_owned)
 Values(1, 'Test', 'unfinished', 'Combo', 2);
@@ -82,5 +82,5 @@ Values(1, 'pass12345', 'nsmzk3@umsystem.edu', 1, 1);
 INSERT Into CardLibrary(library_id, manager_id, l_cards_owned)
 Values(1, 0, 1);
 INSERT Into CardLibrary(library_id, manager_id, l_cards_owned)
-Values(1, 0, 2);
+Values(2, 0, 2);
 
