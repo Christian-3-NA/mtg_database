@@ -54,7 +54,11 @@ while exit_program == False:
             temp1 = input()
             print('\nPassword:')
             temp2 = input()
-            signed_in_as = temp1
+
+            for i in user_login_info:
+                if (i[0] == temp1) and (i[1] == temp2):
+                    print('\nSign in successful.')
+                    signed_in_as = i[0]
 
             if signed_in_as == '':
                 print('\nSign in failed.')
@@ -95,6 +99,7 @@ while exit_program == False:
         cur.execute(qry, (temp1, temp2, temp3, 0, new_coll_val))
         db.commit()        
 
+        user_login_info.append([temp1, temp2])
         print('\nAccount Created!')
 
     elif terminal_input == '3':
