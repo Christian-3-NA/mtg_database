@@ -133,6 +133,9 @@ while exit_program == False:
         card_collection = []
         meow_card_collection = []
         user_card_collection = []
+        decks = []
+        meow_decks = []
+        user_decks = []
         
         terminal_input = input()
         #Display Collection
@@ -277,13 +280,29 @@ while exit_program == False:
                         print('Card Set - ' + i[2])
                         print('Text ----- ' + i[3])
             
+
         # Display Deck
         elif terminal_input == '5':
-            qry = 'SELECT * FROM Deck'
-            cur.execute(qry)
-            temp1 = cur.fetchall()
-            for i in temp1:
-                print(i)
+            if signed_in_as == 'user':
+                print('Name --- ' + user_decks[0])
+                print('Tags --- ' + user_decks[1])
+                print('Format - ' + user_decks[2])
+                for i in user_decks[3]:
+                    print[i]
+
+            elif signed_in_as == 'meow':
+                print('Name --- ' + meow_decks[0])
+                print('Tags --- ' + meow_decks[1])
+                print('Format - ' + meow_decks[2])
+                for i in meow_decks[3]:
+                    print[i]
+
+            else:
+                print('Name --- ' + decks[0])
+                print('Tags --- ' + decks[1])
+                print('Format - ' + decks[2])
+                for i in decks[3]:
+                    print[i]
             
         # Create deck
         elif terminal_input == '6':
@@ -297,9 +316,15 @@ while exit_program == False:
             print('\nWhat is the format?')
             temp3 = input()
 
-            qry = 'INSERT INTO Deck (deck_id, deck_name, tags, format, d_cards_owned) values(?, ?, ?, ?, NULL);'
-            cur.execute(qry, (1, temp1, temp2, temp3))
-            db.commit()
+            if signed_in_as == 'user':
+                user_decks.append([temp1, temp2, temp3, []])
+
+            elif signed_in_as == 'meow':
+                meow_decks.append([temp1, temp2, temp3, []])
+
+            else:
+                decks.append([temp1, temp2, temp3, []])
+            
             print('Deck created successfully.')
             
         elif terminal_input == '7':
@@ -308,9 +333,22 @@ while exit_program == False:
             print('\nWhat card are you adding? (Provide the id of the card)')
             temp2 = input()
 
-            qry = 'UPDATE Deck SET d_cards_owned=? WHERE deck_name=?'
-            cur.execute(qry, (temp2, temp1))
-            db.commit()
+            if signed_in_as == 'user':
+                for i in user_decks:
+                    if i[0] == temp1:
+                        i[3].append(temp2)
+
+            elif signed_in_as == 'meow':
+                for i in meow_decks:
+                    if i[0] == temp1:
+                        i[3].append(temp2)
+
+            else:
+                for i in decks:
+                    if i[0] == temp1:
+                        i[3].append(temp2)
+
+            print('\nCard added successfully.')
             
         elif terminal_input == '8':
             print('\nWhats the name of the deck youre updating?')
