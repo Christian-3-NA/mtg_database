@@ -232,20 +232,50 @@ while exit_program == False:
             print('\nWhat card are you removing? (Provide the id of the card)')
             temp1 = input()
 
-            qry = 'DELETE FROM Collection WHERE c_cards_owned=?'
-            cur.execute(qry, (temp1))
-            db.commit()
+            if signed_in_as == 'user':
+                for i in user_card_collection:
+                    if i[0] == temp1:
+                        user_card_collection.remove[i]
+
+            elif signed_in_as == 'meow':
+                for i in meow_card_collection:
+                    if i[0] == temp1:
+                        meow_card_collection.remove[i]
+
+            else:
+                for i in card_collection:
+                    if i[0] == temp1:
+                        card_collection.remove[i]
+
+            print('\nCard succesfully removed.')
             
         elif terminal_input == '4':
             print('\nWhat card are you looking for? (Provide the id of the card)')
             temp1 = input()
 
-            qry = 'SELECT * FROM Collection WHERE c_cards_owned=?'
-            cur.execute(qry)
-            db.commit()
-            temp1 = cur.fetchall()
-            for i in temp1:
-                print(i)
+            if signed_in_as == 'user':
+                for i in user_card_collection:
+                    if i[0] == temp1:
+                        print('\nID ------- ' + i[0])
+                        print('Name ----- ' + i[1])
+                        print('Card Set - ' + i[2])
+                        print('Text ----- ' + i[3])
+
+            elif signed_in_as == 'meow':
+                for i in meow_card_collection:
+                    if i[0] == temp1:
+                        print('\nID ------- ' + i[0])
+                        print('Name ----- ' + i[1])
+                        print('Card Set - ' + i[2])
+                        print('Text ----- ' + i[3])
+
+            else:
+                for i in card_collection:
+                    if i[0] == temp1:
+                        print('\nID ------- ' + i[0])
+                        print('Name ----- ' + i[1])
+                        print('Card Set - ' + i[2])
+                        print('Text ----- ' + i[3])
             
         # Display Deck
         elif terminal_input == '5':
