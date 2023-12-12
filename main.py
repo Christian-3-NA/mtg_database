@@ -184,6 +184,50 @@ while exit_program == False:
                 elif temp2 == 'ZEN010':
                     user_card_collection.append(['ZEN010','Devout Lightcaster','Zendikar','Protection from black When Devout Lightcaster enters the battlefield, exile target black permanent.'])
 
+            elif signed_in_as == 'meow':
+                if temp2 == 'ZEN001':
+                    user_card_collection.append(['ZEN001','Armament Master','Zendikar','Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master.'])
+                elif temp2 == 'ZEN002':
+                    user_card_collection.append(['ZEN002','Arrow Volley Trap','Zendikar','If four or more creatures are attacking, you may pay {1\}{W} rather than pay Arrow Volley Trap"s mana cost. Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.'])
+                elif temp2 == 'ZEN003':
+                    user_card_collection.append(['ZEN003','Bold Defense','Zendikar','Kicker {3\}{W} (You may pay an additional {3}{W} as you cast this spell.) Creatures you control get +1/+1 until end of turn. If Bold Defense was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn.'])
+                elif temp2 == 'ZEN004':
+                    user_card_collection.append(['ZEN004','Brave the Elements','Zendikar','Choose a color. White creatures you control gain protection from the chosen color until end of turn.'])
+                elif temp2 == 'ZEN005':
+                    user_card_collection.append(['ZEN005','Caravan Hurda','Zendikar','Lifelink (Damage dealt by this creature also causes you to gain that much life.)'])
+                elif temp2 == 'ZEN006':
+                    user_card_collection.append(['ZEN006','Celestial Mantle','Zendikar','Enchant creature Enchanted creature gets +3/+3. Whenever enchanted creature deals combat damage to a player, double its controller"s life total.'])
+                elif temp2 == 'ZEN007':
+                    user_card_collection.append(['ZEN007','Cliff Threader','Zendikar','Mountainwalk (This creature can"t be blocked as long as defending player controls a Mountain.)'])
+                elif temp2 == 'ZEN008':
+                    user_card_collection.append(['ZEN008','Conqueror"s Pledge','Zendikar','Kicker {6\} (You may pay an additional {6} as you cast this spell.) Create six 1/1 white Kor Soldier creature tokens. If Conqueror"s Pledge was kicked, create twelve of those tokens instead.'])
+                elif temp2 == 'ZEN009':
+                    user_card_collection.append(['ZEN009','Day of Judgment','Zendikar','Destroy all creatures.'])
+                elif temp2 == 'ZEN010':
+                    user_card_collection.append(['ZEN010','Devout Lightcaster','Zendikar','Protection from black When Devout Lightcaster enters the battlefield, exile target black permanent.'])
+
+            else:
+                if temp2 == 'ZEN001':
+                    user_card_collection.append(['ZEN001','Armament Master','Zendikar','Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master.'])
+                elif temp2 == 'ZEN002':
+                    user_card_collection.append(['ZEN002','Arrow Volley Trap','Zendikar','If four or more creatures are attacking, you may pay {1\}{W} rather than pay Arrow Volley Trap"s mana cost. Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.'])
+                elif temp2 == 'ZEN003':
+                    user_card_collection.append(['ZEN003','Bold Defense','Zendikar','Kicker {3\}{W} (You may pay an additional {3}{W} as you cast this spell.) Creatures you control get +1/+1 until end of turn. If Bold Defense was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn.'])
+                elif temp2 == 'ZEN004':
+                    user_card_collection.append(['ZEN004','Brave the Elements','Zendikar','Choose a color. White creatures you control gain protection from the chosen color until end of turn.'])
+                elif temp2 == 'ZEN005':
+                    user_card_collection.append(['ZEN005','Caravan Hurda','Zendikar','Lifelink (Damage dealt by this creature also causes you to gain that much life.)'])
+                elif temp2 == 'ZEN006':
+                    user_card_collection.append(['ZEN006','Celestial Mantle','Zendikar','Enchant creature Enchanted creature gets +3/+3. Whenever enchanted creature deals combat damage to a player, double its controller"s life total.'])
+                elif temp2 == 'ZEN007':
+                    user_card_collection.append(['ZEN007','Cliff Threader','Zendikar','Mountainwalk (This creature can"t be blocked as long as defending player controls a Mountain.)'])
+                elif temp2 == 'ZEN008':
+                    user_card_collection.append(['ZEN008','Conqueror"s Pledge','Zendikar','Kicker {6\} (You may pay an additional {6} as you cast this spell.) Create six 1/1 white Kor Soldier creature tokens. If Conqueror"s Pledge was kicked, create twelve of those tokens instead.'])
+                elif temp2 == 'ZEN009':
+                    user_card_collection.append(['ZEN009','Day of Judgment','Zendikar','Destroy all creatures.'])
+                elif temp2 == 'ZEN010':
+                    user_card_collection.append(['ZEN010','Devout Lightcaster','Zendikar','Protection from black When Devout Lightcaster enters the battlefield, exile target black permanent.'])
+
         elif terminal_input == '3':
             print('\nWhat card are you removing? (Provide the id of the card)')
             temp1 = input()
