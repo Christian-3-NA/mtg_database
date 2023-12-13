@@ -92,12 +92,12 @@ while exit_program == False:
             if temp3 == '':
                 print('\nEmail cant be empty! Try again.')
 
-        cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
+        '''cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
         new_coll_val = cur.fetchone()
         new_coll_val = int(new_coll_val[0]) + 1
         qry = "INSERT Into Profile(user_id, password, email, decks_owned, paired_collection) Values(?, ?, ?, ?, ?);"
         cur.execute(qry, (temp1, temp2, temp3, 0, new_coll_val))
-        db.commit()        
+        db.commit()'''     
 
         user_login_info.append([temp1, temp2])
         print('\nAccount Created!')
@@ -284,25 +284,28 @@ while exit_program == False:
         # Display Deck
         elif terminal_input == '5':
             if signed_in_as == 'user':
-                print('Name --- ' + user_decks[0])
-                print('Tags --- ' + user_decks[1])
-                print('Format - ' + user_decks[2])
-                for i in user_decks[3]:
-                    print[i]
+                for i in user_decks:
+                    print('Name --- ' + user_decks[i][0])
+                    print('Tags --- ' + user_decks[i][1])
+                    print('Format - ' + user_decks[i][2])
+                    for j in user_decks[3]:
+                        print[i][j]
 
             elif signed_in_as == 'meow':
-                print('Name --- ' + meow_decks[0])
-                print('Tags --- ' + meow_decks[1])
-                print('Format - ' + meow_decks[2])
-                for i in meow_decks[3]:
-                    print[i]
+                for i in meow_decks:
+                    print('Name --- ' + meow_decks[i][0])
+                    print('Tags --- ' + meow_decks[i][1])
+                    print('Format - ' + meow_decks[i][2])
+                    for j in meow_decks[3]:
+                        print[i][j]
 
             else:
-                print('Name --- ' + decks[0])
-                print('Tags --- ' + decks[1])
-                print('Format - ' + decks[2])
-                for i in decks[3]:
-                    print[i]
+                for i in decks:
+                    print('Name --- ' + decks[i][0])
+                    print('Tags --- ' + decks[i][1])
+                    print('Format - ' + decks[i][2])
+                    for j in decks[3]:
+                        print[i][j]
             
         # Create deck
         elif terminal_input == '6':
@@ -356,40 +359,116 @@ while exit_program == False:
             print('\nWhat card are you deleting? (Provide the id of the card)')
             temp2 = input()
 
-            qry = 'DELETE FROM Deck WHERE d_cards_owned=?'
-            cur.execute(qry, (temp2, temp1))
-            db.commit()
+            if signed_in_as == 'user':
+                for i in user_decks:
+                    if i[0] == temp1:
+                        for j in i[3]:
+                            if i[3][j] == temp2:
+                                i[3][j].remove()
+
+            elif signed_in_as == 'meow':
+                for i in meow_decks:
+                    if i[0] == temp1:
+                        for j in i[3]:
+                            if i[3][j] == temp2:
+                                i[3][j].remove()
+
+            else:
+                for i in decks:
+                    if i[0] == temp1:
+                        for j in i[3]:
+                            if i[3][j] == temp2:
+                                i[3][j].remove()
             
         elif terminal_input == '9':
             print('\nWhats the name of the deck youre updating?')
             temp1 = input()
             print('\nWhats the new name?')
             temp2 = input()
+            print('\nWhats the new tags?')
+            temp3 = input()
+            print('\nWhats the new format?')
+            temp4 = input()
 
-            qry = 'UPDATE Deck SET deck_name=? WHERE deck_name=?'
-            cur.execute(qry, (temp2, temp1))
-            db.commit()
+            if signed_in_as == 'user':
+                for i in user_decks:
+                    if i[0] == temp1:
+                        i[0] = temp2
+                        i[1] = temp3
+                        i[2] = temp4
+
+            elif signed_in_as == 'meow':
+                for i in meow_decks:
+                    if i[0] == temp1:
+                        i[0] = temp2
+                        i[1] = temp3
+                        i[2] = temp4
+
+            else:
+                for i in decks:
+                    if i[0] == temp1:
+                        i[0] = temp2
+                        i[1] = temp3
+                        i[2] = temp4
+
+            print('\nDeck updated successfully.')
             
         elif terminal_input == '10':
             print('\nWhats the name of the deck youre deleting?')
             temp1 = input()
 
-            qry = 'DELETE FROM Deck WHERE deck_name=?'
-            cur.execute(qry, (temp1))
-            db.commit()
+            if signed_in_as == 'user':
+                for i in user_decks:
+                    if i[0] == temp1:
+                        print('Name --- ' + user_decks[0])
+                        print('Tags --- ' + user_decks[1])
+                        print('Format - ' + user_decks[2])
+                        for i in user_decks[3]:
+                            print[i]
+
+            elif signed_in_as == 'meow':
+                for i in meow_decks:
+                    if i[0] == temp1:
+                        meow_decks.remove(i)
+
+            else:
+                for i in decks:
+                    if i[0] == temp1:
+                        decks.remove(i)
+
+            print('\nDeck deleted successfully')
             
         # Search for Deck
         elif terminal_input == '11':
             print('\nWhat deck would you like to display? Please provide the exact name.')
-            temp2 = input()
+            temp1 = input()
 
-            qry = 'SELECT * FROM Deck'
-            cur.execute(qry)
-            db.commit()
-            temp1 = cur.fetchall()
-            for i in temp1:
-                if i[1] == temp2:
-                    print(i)
+            if signed_in_as == 'user':
+                for i in user_decks:
+                    if i[0] == temp1:
+                        print('Name --- ' + user_decks[i][0])
+                        print('Tags --- ' + user_decks[i][1])
+                        print('Format - ' + user_decks[i][2])
+                        for j in user_decks[3]:
+                            print[i][j]
+
+            elif signed_in_as == 'meow':
+                for i in meow_decks:
+                    if i[0] == temp1:
+                        print('Name --- ' + meow_decks[i][0])
+                        print('Tags --- ' + meow_decks[i][1])
+                        print('Format - ' + meow_decks[i][2])
+                        for j in user_decks[3]:
+                            print[i][j]
+
+            else:
+                for i in decks:
+                    if i[0] == temp1:
+                        print('Name --- ' + decks[i][0])
+                        print('Tags --- ' + decks[i][1])
+                        print('Format - ' + decks[i][2])
+                        for j in decks[3]:
+                            print[i][j]
             
         elif terminal_input == '12':
             temp1 = ''
