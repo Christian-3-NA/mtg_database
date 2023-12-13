@@ -91,13 +91,23 @@ while exit_program == False:
             temp3 = input()
             if temp3 == '':
                 print('\nEmail cant be empty! Try again.')
+<<<<<<< HEAD
 
         '''cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
+=======
+        '''#
+        cur.execute("""SELECT MAX(paired_collection) FROM Profile;""")
+>>>>>>> 7a8e2e0b9e709912a334a38bcdf0f945afdeedb3
         new_coll_val = cur.fetchone()
         new_coll_val = int(new_coll_val[0]) + 1
         qry = "INSERT Into Profile(user_id, password, email, decks_owned, paired_collection) Values(?, ?, ?, ?, ?);"
         cur.execute(qry, (temp1, temp2, temp3, 0, new_coll_val))
+<<<<<<< HEAD
         db.commit()'''     
+=======
+        db.commit()        
+        '''
+>>>>>>> 7a8e2e0b9e709912a334a38bcdf0f945afdeedb3
 
         user_login_info.append([temp1, temp2])
         print('\nAccount Created!')
